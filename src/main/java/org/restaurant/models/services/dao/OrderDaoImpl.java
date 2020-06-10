@@ -33,7 +33,7 @@ public class OrderDaoImpl implements OrderDao {
         for (OrderR order1 : orderList) {
             if (order1.equals(order)){
                 orderList.remove(order);
-                break;
+                return;
             }
         }
     }
@@ -49,6 +49,7 @@ public class OrderDaoImpl implements OrderDao {
         for(OrderR o : orderList) {
             if(o.equals(order)) {
                 o.getMealList().add(meal);
+                order.getMealList().add(meal);
             }
         }
     }
@@ -61,6 +62,7 @@ public class OrderDaoImpl implements OrderDao {
         for(OrderR o : orderList) {
             if(o.equals(order)) {
                 o.getMealList().remove(meal);
+                order.getMealList().remove(meal);
             }
         }
     }

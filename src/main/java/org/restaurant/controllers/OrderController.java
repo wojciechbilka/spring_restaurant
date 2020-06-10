@@ -14,10 +14,12 @@ public class OrderController {
 
     @Autowired
     private OrderDao orderDao;
-    @Autowired private Restaurant restaurant;
+    @Autowired
+    private Restaurant restaurant;
     private OrderR ourOrderR;
 
-    @GetMapping("/order") public String orderGet(Model model){
+    @GetMapping("/order")
+    public String orderGet(Model model){
         model.addAttribute("welcome", "Please place order and wait for preparing it");
         model.addAttribute("menu", "Our Menu: " + restaurant.getMenu().toString());
         orderDao.addOrder(new OrderR());
@@ -26,8 +28,8 @@ public class OrderController {
         return "order";
     }
 
-    @RequestMapping(params = "addOrder", method = RequestMethod.POST) public String orderAdd(
-            @ModelAttribute("userRequest") UserRequest userRequest, Model model){
+    @RequestMapping(params = "addOrder", method = RequestMethod.POST)
+    public String orderAdd(@ModelAttribute("userRequest") UserRequest userRequest, Model model){
         model.addAttribute("welcome", "Please place order and wait for preparing it");
         model.addAttribute("menu", "Our Menu: " + restaurant.getMenu().toString());
         if (ourOrderR.getOrderOwner()==null && !userRequest.getName().equals("")){
@@ -45,8 +47,8 @@ public class OrderController {
         return "order";
     }
 
-    @RequestMapping(params = "removeOrder", method = RequestMethod.POST) public String orderRemove(
-            @ModelAttribute("userRequest") UserRequest userRequest, Model model){
+    @RequestMapping(params = "removeOrder", method = RequestMethod.POST)
+    public String orderRemove(@ModelAttribute("userRequest") UserRequest userRequest, Model model){
         model.addAttribute("welcome", "Please place order and wait for preparing it");
         model.addAttribute("menu", "Our Menu: " + restaurant.getMenu().toString());
         if (ourOrderR.getOrderOwner()==null && !userRequest.getName().equals("")){
@@ -65,8 +67,8 @@ public class OrderController {
         return "order";
     }
 
-    @RequestMapping(params = "placeOrder", method = RequestMethod.POST) public String orderPlace(
-            @ModelAttribute("userRequest") UserRequest userRequest, Model model){
+    @RequestMapping(params = "placeOrder", method = RequestMethod.POST)
+    public String orderPlace(@ModelAttribute("userRequest") UserRequest userRequest, Model model){
         model.addAttribute("welcome", "Please place order and wait for preparing it");
         model.addAttribute("menu", "Our Menu: " + restaurant.getMenu().toString());
         if (ourOrderR.getMealList().size()>0){
@@ -81,5 +83,4 @@ public class OrderController {
         orderDao.addOrder(new OrderR());
         return "order";
     }
-
 }

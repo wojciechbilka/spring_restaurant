@@ -41,24 +41,38 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void addMealToOrder(OrderR order, Meal meal) {
         //todo repair
-        Set<Meal> ourMeals = (Set<Meal>) order.getMealList();
-        ourMeals.add(meal);
-        order.setMealList((List<Meal>)ourMeals);
+        if(orderList.isEmpty()) {
+            order.getMealList().add(meal);
+            orderList.add(order);
+            return;
+        }
+        for(OrderR o : orderList) {
+            if(o.equals(order)) {
+                o.getMealList().add(meal);
+            }
+        }
     }
 
     @Override
     public void removeMealFromOrder(OrderR order, Meal meal) {
-        //todo implement
+        if(orderList.isEmpty()) {
+            return;
+        }
+        for(OrderR o : orderList) {
+            if(o.equals(order)) {
+                o.getMealList().remove(meal);
+            }
+        }
     }
 
     @Override
     public boolean checkIfMealAppearInOurOrder(OrderR order, Meal meal){
         //todo repair
-        for (int i = 0; i > order.getMealList().size(); i++) {
-            if (order.getMealList().get(i).equals(meal)){
-                return false;
+        for (Meal m : order.getMealList()) {
+            if (m.getName().equals(meal.getName())){
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }

@@ -24,11 +24,20 @@ public class Restaurant {
      public int calculateOrderPrice(OrderR orderR){
         int sum = 0;
         //todo implement
+         for(Meal m : orderR.getMealList()) {
+             sum += m.getPrice();
+         }
         return sum;
     }
 
     public Meal getMeal(String mealName){
         //todo implement
+        MealDatabase md = new MealDatabase();
+        for(Meal m : md.getMeals()) {
+            if(m.getName().equals(mealName)) {
+                return m;
+            }
+        }
         return null;
     }
 

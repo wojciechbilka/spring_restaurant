@@ -2,6 +2,7 @@ package org.restaurant.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OrderR {
 
@@ -33,5 +34,17 @@ public class OrderR {
         this.mealList = mealList;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderR orderR = (OrderR) o;
+        return getOrderOwner().equals(orderR.getOrderOwner());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getOrderOwner());
+    }
 }
 

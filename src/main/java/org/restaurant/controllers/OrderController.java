@@ -76,11 +76,28 @@ public class OrderController {
                     ourOrderR.getMealList().toString());
             model.addAttribute("message", "OrderR Total: $" +
                     restaurant.calculateOrderPrice(ourOrderR));
+            model.addAttribute("allOrders", printAllOrders());
         } else {
             model.addAttribute("message", "OrderR has been cancelled..");
         }
-        orderDao.removeOrder(ourOrderR);
+        //orderDao.removeOrder(ourOrderR);
         orderDao.addOrder(new OrderR());
+        ourOrderR = orderDao.getAllOrders().get(orderDao.getAllOrders().size()-1);
         return "order";
+    }
+
+    private String printAllOrders() {
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for(OrderR o : orderDao.getAllOrders()) {
+            sb.append("Order no " + i + " ordered by " + o.getOrderOwner() + ": \n");
+            for(int j = 0; j < o.getMealList().size() - 2; j++) {
+                sb.append(o.getMealList().get(j) + ", ");
+            }
+            sb.append(o.getMealList().get(o.getMealList().size()-1) + "." + "\n");
+            i++;
+        }
+        System.out.println(sb.toString());
+        return sb.toString();
     }
 }

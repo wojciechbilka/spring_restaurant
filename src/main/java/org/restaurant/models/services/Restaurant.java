@@ -23,7 +23,6 @@ public class Restaurant {
 
      public int calculateOrderPrice(OrderR orderR){
         int sum = 0;
-        //todo implement
          for(Meal m : orderR.getMealList()) {
              sum += m.getPrice();
          }
@@ -31,9 +30,7 @@ public class Restaurant {
     }
 
     public Meal getMeal(String mealName){
-        //todo implement
-        MealDatabase md = new MealDatabase();
-        for(Meal m : md.getMeals()) {
+        for(Meal m : menu) {
             if(m.getName().equals(mealName)) {
                 return m;
             }

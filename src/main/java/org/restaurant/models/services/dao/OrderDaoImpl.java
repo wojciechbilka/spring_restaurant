@@ -40,7 +40,6 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void addMealToOrder(OrderR order, Meal meal) {
-        //todo repair
         if(orderList.isEmpty()) {
             order.getMealList().add(meal);
             orderList.add(order);
@@ -67,7 +66,6 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean checkIfMealAppearInOurOrder(OrderR order, Meal meal){
-        //todo repair
         for (Meal m : order.getMealList()) {
             if (m.getName().equals(meal.getName())){
                 return true;

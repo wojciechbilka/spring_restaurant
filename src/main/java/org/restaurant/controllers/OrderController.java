@@ -35,6 +35,9 @@ public class OrderController {
         if (ourOrderR.getOrderOwner()==null && !userRequest.getName().equals("")){
             ourOrderR.setOrderOwner(userRequest.getName());
         }
+        if(ourOrderR.getOrderOwner()==null && userRequest.getName().equals("")) {
+            return "order";
+        }
         if (ourOrderR.getOrderOwner()!=null){
             model.addAttribute("userName", "OrderR placing by: " + ourOrderR.getOrderOwner());
         }
@@ -53,6 +56,9 @@ public class OrderController {
         model.addAttribute("menu", "Our Menu: " + restaurant.getMenu().toString());
         if (ourOrderR.getOrderOwner()==null && !userRequest.getName().equals("")){
             ourOrderR.setOrderOwner(userRequest.getName());
+        }
+        if(ourOrderR.getOrderOwner()==null && userRequest.getName().equals("")) {
+            return "order";
         }
         if (ourOrderR.getOrderOwner()!=null){
             model.addAttribute("userName", "OrderR placing by: " + ourOrderR.getOrderOwner());
@@ -90,11 +96,11 @@ public class OrderController {
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for(OrderR o : orderDao.getAllOrders()) {
-            sb.append("Order no " + i + " ordered by " + o.getOrderOwner() + ": \n");
-            for(int j = 0; j < o.getMealList().size() - 2; j++) {
-                sb.append(o.getMealList().get(j) + ", ");
+            sb.append("Order no ").append(i).append(" ordered by ").append(o.getOrderOwner()).append(": \n");
+            for(int j = 0; j < o.getMealList().size() - 1; j++) {
+                sb.append(o.getMealList().get(j)).append(", ");
             }
-            sb.append(o.getMealList().get(o.getMealList().size()-1) + "." + "\n");
+            sb.append(o.getMealList().get(o.getMealList().size() - 1)).append(".").append("\n");
             i++;
         }
         System.out.println(sb.toString());
